@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="pychronic",
-    version="0.0.1",
+    version="0.0.2",
     author="jayeshathila",
     author_email="sharma.jayesh52@gmail.com",
     description="A library to convert datetime to natural human readable format",
