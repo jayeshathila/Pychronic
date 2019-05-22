@@ -1,3 +1,4 @@
+import calendar
 from datetime import datetime
 
 from pychronic.datetime import PychronicDatetime
@@ -11,7 +12,8 @@ def to_natural_time(
     natural_day = get_natural_day_or_none(day_diff)
 
     if not natural_day:
-        natural_day = _convert_date_to_str(datetime.date().day)
+        day = datetime.date().day
+        natural_day = f"{day}{_convert_date_to_str(datetime.date().day)}"
 
     time_str = datetime.strftime("%I:%M %p" if twelve_hour_clock else "%H:%M")
 
@@ -20,6 +22,7 @@ def to_natural_time(
         time=time_str,
         month=datetime.strftime("%B"),
         year=datetime.year,
+        day_of_week=calendar.day_name[datetime.weekday()],
     )
 
 
