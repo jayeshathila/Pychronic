@@ -58,7 +58,7 @@ keyword_vs_month = {keyword: m for m in Month for keyword in m.value}
 
 
 def get_month_for_keyword(keyword: str) -> Optional[Month]:
-    return keyword_vs_month.get(keyword)
+    return keyword_vs_month.get(keyword.lower())
 
 
 class Period(Enum):
@@ -70,4 +70,4 @@ keyword_vs_period = {keyword: p for p in Period for keyword in p.value}
 
 
 def get_period_for_keyword(keyword: str) -> Optional[Month]:
-    return keyword_vs_period.get(keyword)
+    return keyword_vs_period.get(keyword.lower())
