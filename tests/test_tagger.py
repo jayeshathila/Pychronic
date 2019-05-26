@@ -15,3 +15,19 @@ def test_tagger_for_date_time():
         "today": DataType.DATE_MONTH_YEAR,
     }
     assert all(tag_map[t.word] == t.datatype for t in tagged_words)
+
+
+def test_tagger_for_date_time_and_():
+    subject = "Meeting will commence on 12:30 PM on 23 May"
+    tagged_words = Tagger().tag(subject)
+    tag_map = {
+        "Meeting": DataType.TEXT,
+        "will": DataType.TEXT,
+        "commence": DataType.TEXT,
+        "on": DataType.TEXT,
+        "12:30": DataType.HOUR_MIN_SEC,
+        "PM": DataType.PERIOD,
+        "23": DataType.INT,
+        "May": DataType.MONTH,
+    }
+    assert all(tag_map[t.word] == t.datatype for t in tagged_words)

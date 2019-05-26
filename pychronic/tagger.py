@@ -26,6 +26,7 @@ class Tagger:
     def __init__(self):
         data_type_vs_validator[DataType.INT] = self._to_int
         data_type_vs_validator[DataType.DATE_MONTH] = self._to_date_of_month
+        data_type_vs_validator[DataType.MONTH] = self._to_month
         data_type_vs_validator[DataType.DATE_MONTH_YEAR] = self._to_date_month_year
         data_type_vs_validator[DataType.PERIOD] = self._to_period
         data_type_vs_validator[DataType.HOUR_MIN_SEC] = self._to_hour_min_sec
