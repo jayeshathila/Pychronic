@@ -11,7 +11,7 @@ from pychronic.enums import (
 from pychronic.models.data_types import DataType
 from pychronic.models.tagged_word import TaggedWord
 
-escape_words = [","]
+int_suffixes = {"st", "nd", "rd", "th"}
 
 data_type_vs_validator = {}
 
@@ -25,7 +25,6 @@ hour_min_patterns = ["%H:%M:%S", "%H-%M-%S", "%H:%M", "%H-%M"]
 class Tagger:
     def __init__(self):
         data_type_vs_validator[DataType.INT] = self._to_int
-        data_type_vs_validator[DataType.DATE_MONTH] = self._to_date_of_month
         data_type_vs_validator[DataType.MONTH] = self._to_month
         data_type_vs_validator[DataType.DATE_MONTH_YEAR] = self._to_date_month_year
         data_type_vs_validator[DataType.PERIOD] = self._to_period
@@ -46,17 +45,16 @@ class Tagger:
         return rv
 
     def _to_int(self, words_list: List, index: int) -> Optional[int]:
-        if words_list[index].isdigit():
+        word = words_list[index]
+        if word.isdigit():
             return int(words_list[index])
 
-    def _to_date_of_month(self, words_list: List, index: int) -> Optional[int]:
-        word = words_list[index]
-        # Todo: add support for 23rd , 1st etc
-        if isinstance(word, int):
-            if 1 <= int(word) <= 31:
-                return int(word)
+        last_chars = word.lower()[-2:]
+        if last_chars not in int_suffixes:
+            return None
 
-        return None
+        if word[:-2].isdigit():
+            return int(word[:-2])
 
     def _to_month(self, words_list: List, index: int) -> Optional[Month]:
         word = words_list[index]
