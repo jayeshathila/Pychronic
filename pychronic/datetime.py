@@ -1,4 +1,4 @@
-# Exposing class to use the fields as per end users convinience
+# Exposing class to use the fields as per end users convenience
 class PychronicDatetime:
     def __init__(self, day: str, time: str, month: str, year: int, day_of_week: str):
         self.day = day
