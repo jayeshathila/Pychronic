@@ -1,13 +1,11 @@
 import calendar
 from datetime import datetime
+from typing import Dict
 
-from pychronic.datetime import PychronicDatetime
 from pychronic.enums import get_natural_day_or_none
 
 
-def to_natural_time(
-    datetime: datetime, twelve_hour_clock: bool = True
-) -> PychronicDatetime:
+def to_natural_time(datetime: datetime, twelve_hour_clock: bool = True) -> Dict:
     day_diff = (datetime.date() - datetime.now().date()).days
     natural_day = get_natural_day_or_none(day_diff)
 
@@ -17,13 +15,13 @@ def to_natural_time(
 
     time_str = datetime.strftime("%I:%M %p" if twelve_hour_clock else "%H:%M")
 
-    return PychronicDatetime(
-        day=natural_day,
-        time=time_str,
-        month=datetime.strftime("%B"),
-        year=datetime.year,
-        day_of_week=calendar.day_name[datetime.weekday()],
-    )
+    return {
+        "day": natural_day,
+        "time": time_str,
+        "month": datetime.strftime("%B"),
+        "year": datetime.year,
+        "day_of_week": calendar.day_name[datetime.weekday()],
+    }
 
 
 def _convert_date_to_str(day):

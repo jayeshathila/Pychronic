@@ -24,7 +24,8 @@ keyword_vs_natural_day = {
 
 
 def get_natural_day_or_none(day_index: int) -> Optional[str]:
-    return index_vs_natural_days.get(day_index)
+    rv = index_vs_natural_days.get(day_index)
+    return rv[0] if rv else None
 
 
 def convert_from_keyword(keyword: str) -> Optional[datetime]:
