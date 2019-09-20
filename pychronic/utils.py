@@ -11,6 +11,12 @@ from pychronic.tagger import Tagger
 
 
 def to_natural_time(datetime: datetime, twelve_hour_clock: bool = True) -> Dict:
+    """
+    Convert datetime to natural time.
+    :param datetime: 2019-09-20 22:39:58.643374
+    :param twelve_hour_clock: False
+    :return: Dict: {'day': 'today', 'time': '10:39 PM', 'month': 'September', 'year': 2019, 'day_of_week': 'Friday'}
+    """
     day_diff = (datetime.date() - datetime.now().date()).days
     natural_day = get_natural_day_or_none(day_diff)
 
@@ -30,6 +36,24 @@ def to_natural_time(datetime: datetime, twelve_hour_clock: bool = True) -> Dict:
 
 
 def highlight_from_text(text: str) -> Dict:
+
+    """
+     Output highlighted datetime in the input text.
+    :param text: str
+    :return: Dict
+
+    Eg:
+    Input: `Tournament will commence on 11:30 PM on 23rd May and end on 25th aug`
+
+    Output: `{'input': ['Tournament', 'will', 'commence', 'on', '11:30', 'PM', 'on', '23rd', 'May', 'and', 'end', 'on',
+                        '25th', 'aug'],
+           'matched_pattern': [{'from_index': 4, 'to_index': 8, 'parsed_value': datetime.datetime(2019, 5, 23, 23, 30)},
+                               {'from_index': 12, 'to_index': 13, 'parsed_value': datetime.date(2019, 8, 25)}]
+            }`
+
+    Note: `parsed_value` can be either `datetime.date` or `datetime.datetime`
+
+    """
     if not text:
         return {}
 
