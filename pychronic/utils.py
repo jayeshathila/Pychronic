@@ -29,9 +29,9 @@ def to_natural_time(datetime: datetime, twelve_hour_clock: bool = True) -> Dict:
     }
 
 
-def highlight_from_text(text: str):
+def highlight_from_text(text: str) -> Dict:
     if not text:
-        return text
+        return {}
 
     tagged_words = Tagger().tag(source_text=text)
     rv = ParsedInput([t.word for t in tagged_words])
@@ -53,7 +53,7 @@ def highlight_from_text(text: str):
                     index += pattern_size - 1
                     break
         index += 1
-    return rv
+    return rv.to_dict()
 
 
 def _convert_date_to_str(day):
