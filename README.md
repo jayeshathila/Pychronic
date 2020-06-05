@@ -52,3 +52,6 @@ Fork and pull request.
 ### Contributors
 [Jayesh](https://github.com/jayeshathila.com)
 
+
+## Stats
+![visitors](https://visitor-badge.glitch.me/badge?page_id=jayeshathila.Pychronic)	![code-size](https://img.shields.io/github/languages/code-size/jayeshathila/Pychronic)
